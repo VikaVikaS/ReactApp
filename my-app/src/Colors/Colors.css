@@ -1,0 +1,13 @@
+.colorsSelects {
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.colorsSelects .item {
+    float: left;
+    margin-right: 20px;
+}
+
+.colorsSelects .title {
+    margin-bottom: 10px;
+}
