@@ -1,22 +1,14 @@
 import React, { Component } from 'react';
 import './Editor.css';
-import Background from '../Colors/Background';
-import TextColor from '../Colors/TextColor';
-import { GithubPicker } from 'react-color';
+import Colors from '../Colors/Colors';
 
 
 class Editor extends Component {
 
-    constructor(props) {
-
-        super(props);
-        
-        // var posts=[];
-    }
-
-    state = {
+    state={
         background: '#fff',
-        color: '#000'
+        color: '#000',
+        text: ''
     }
 
     handleChangeCompleteBackground = (color) => {
@@ -27,31 +19,46 @@ class Editor extends Component {
         this.setState({ color: color.hex });
     }
 
-    handleSubmit(e) {
-        e.preventDefault();
+    handleChange = (event) => {
+        this.setState({ text: event.target.value });
+    } 
 
-        // localStorage.setItem('notes', ''+posts+'')
+    handleSubmit = (event) => {
+        event.preventDefault();
+
+        var newNote = {
+            text: this.state.text,
+            color: this.state.color,
+            background: this.state.background,
+            id: Date.now()
+        };
+
+       
+        this.props.onSubmit(newNote);
+
+        this.setState({
+            background: '#fff',
+            color: '#000',
+            text: ' '
+        });
     }
 
     render() {
         return (
             <form className="editor">
-                <div className="colorsSelects">
-                    <div className="item">
-                        <div className="title">
-                            Choose a background color
-                        </div>
-                        <GithubPicker onChangeComplete={ this.handleChangeCompleteBackground } />
-                    </div>
-                    <div className="item">
-                        <div className="title">
-                            Choose a text color
-                        </div>
-                        <GithubPicker onChangeComplete={ this.handleChangeCompleteColor } />
-                    </div>
-                </div>
-                <textarea style={{background:this.state.background, color:this.state.color}}></textarea>
-                <div className="editor-btn"><button type="submit" onClick={this.handleSubmit}>Send</button></div>
+                <Colors 
+                    onChangeCompleteBackground={this.handleChangeCompleteBackground} 
+                    onChangeCompleteColor={this.handleChangeCompleteColor}
+                />
+                <textarea 
+
+                    style={{background:this.state.background, 
+                            color:this.state.color}} 
+                    onChange={this.handleChange}
+                    value={this.state.text}
+
+                ></textarea>
+                <div className="editor-btn"><button onClick={this.handleSubmit}>Send</button></div>
             </form>
         );
     }

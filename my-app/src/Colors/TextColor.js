@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './Colors.css';
-import { GithubPicker } from 'react-color';
+import { CirclePicker } from 'react-color';
 
 class TextColor extends Component {
 
@@ -10,7 +10,7 @@ class TextColor extends Component {
                 <div className="title">
                     Choose a text color
                 </div>
-                <GithubPicker />
+                <CirclePicker onChangeComplete={ this.props.onChangeColor} />
             </div>
         );
     }

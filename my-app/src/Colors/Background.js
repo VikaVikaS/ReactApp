@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import './Colors.css';
-import { GithubPicker } from 'react-color';
+import { CirclePicker } from 'react-color';
 
 class Background extends Component {
-
-    
 
     render() {
         return (
@@ -12,7 +10,7 @@ class Background extends Component {
                 <div className="title">
                     Choose a background color
                 </div>
-                <GithubPicker onChangeComplete={ this.handleChangeCompleteBackground } />
+                <CirclePicker onChangeComplete={ this.props.onChangeBackground } />
             </div>
         );
     }

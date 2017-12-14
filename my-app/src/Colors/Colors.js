@@ -6,10 +6,13 @@ import TextColor from './TextColor';
 
 class Colors extends Component {
     render() {
+        var onChangeCompleteBackground = this.props.onChangeCompleteBackground,
+            onChangeCompleteColor = this.props.onChangeCompleteColor;
+
         return (
             <div className="colorsSelects">
-                <Background onChangeComplete={ this.handleChangeCompleteText } />
-                <TextColor onChangeComplete={ this.handleChangeCompleteBackground } />
+                <Background onChangeBackground={onChangeCompleteBackground.bind(null)}/>
+                <TextColor onChangeColor={onChangeCompleteColor.bind(null)}/>
             </div>
         );
     }

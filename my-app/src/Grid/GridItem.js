@@ -5,8 +5,8 @@ class GridItem extends Component {
     render() {
         return (
           <li>
-            <div className="noteItem" style={{background:this.props.color, color:this.props.textColor}}>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laborum, sunt. 
+            <div className="noteItem" style={{background:this.props.background, color:this.props.color}}>
+               {this.props.children}
             </div>
           </li>
         );
