@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
-import './Colors.css';
 import { CirclePicker } from 'react-color';
 
 class Background extends Component {
-
+    state = {
+        background: '#fff'
+    }
     render() {
         return (
            <div className="item">
                 <div className="title">
-                    Choose a background color
+                    Select a background color
                 </div>
-                <CirclePicker onChangeComplete={ this.props.onChangeBackground } />
+                <CirclePicker color={ this.props.background } onChangeComplete={ this.props.onChangeBackground } />
             </div>
         );
     }

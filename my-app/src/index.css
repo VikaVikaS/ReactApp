@@ -4,8 +4,186 @@ body {
   font-family: sans-serif;
 }
 
+body, html, #root {
+    height: 100%;
+}
+
+.NotesApp {
+    position: relative;
+    min-height: 100%;
+}
+
 
 * {
     box-sizing: border-box;
 }
 
+
+*:focus {
+    outline: none;
+}
+.grid {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.grid:after {
+    content:'';
+    display: table;
+    width: 100%;
+    clear: both;
+}
+
+.grid li {
+    float: left;
+    min-width: calc(25% - 20px);
+    max-width:calc(50% - 20px);
+    margin: 0 10px 20px;
+}
+
+.noteItem {
+    position: relative;
+    padding: 12px 10px;
+    font:300 30px/1.3 sans-serif;
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.2);
+}
+
+.noteDelete {
+    position: absolute;
+    top: 0px;
+    right: 5px;
+    font-size: 18px;
+
+    cursor: pointer;
+}
+
+.colorsSelects {
+    margin-bottom: 40px;
+}
+
+.colorsSelects:after {
+    content:'';
+    display: table;
+    width: 100%;
+    clear: both;
+}
+
+.colorsSelects .item {
+    float: left;
+    margin-right: 70px;
+}
+
+.colorsSelects .title {
+    margin-bottom: 20px;
+}
+
+.editor{
+    margin-bottom: 50px;
+}
+
+.editor textarea {
+    width: 100%;
+    height: 100px;
+    resize:none;
+
+    margin-bottom: 20px;
+}
+
+.editor-btn {
+    text-align: right;
+}
+
+.editor-btn > div {
+    display: inline-block;
+    width: 300px;
+    height: 50px;
+    padding: 15px 0;
+    font-size: 20px;
+    text-transform: uppercase;
+    text-align: center;
+    background-color: #f2f2f2;
+
+    cursor: pointer;
+}
+
+.NotesApp {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 30px 0 100px;
+}
+
+.noteDate {
+    margin-bottom: 10px;
+    font-size: 12px;
+}
+
+.textStyles {
+    margin-bottom: 30px;
+}
+
+.textStyles .item {
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 57px;
+}
+
+.textStyles .item > span {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 20px;
+}
+
+.textStyles .title {
+    margin-bottom: 20px;
+}
+
+.textStyles .main > span {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 20px;
+
+    cursor: pointer;
+}
+
+.reset-btn {
+    position: absolute;
+    bottom: 30px;
+    left: 0;
+    right: 0;
+    display: block;
+    width: 500px;
+    margin: 0 auto;
+    box-shadow:none;
+    border:none;
+
+    height: 50px;
+    
+    font-size: 18px;
+    text-transform: uppercase;
+
+    cursor: pointer;
+}
+
+.size-slider {
+    position: relative;
+    width: 180px;
+    height: 10px;
+    background-color: #f2f2f2;
+
+    margin-top: 30px;
+}
+
+.size-slider span {
+    position: absolute;
+    top: calc(50% - 7.5px);
+    left: 0;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: #000;
+}
+
+.textWrapper {
+    font-size: 30px;
+}

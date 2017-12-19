@@ -1,45 +1,120 @@
 import React, { Component } from 'react';
-import './Editor.css';
+
 import Colors from '../Colors/Colors';
+import TextStyles from '../TextStyles/TextStyles';
 
 
 class Editor extends Component {
-
-    state={
+    constructor(props) {
+        super(props);
+        this.handleDragSize = this.handleDragSize.bind(this);
+    }
+    state = {
         background: '#fff',
         color: '#000',
-        text: ''
+        border:'#000',
+        text: '',
+        fontSize: 14,
+        fontStyle: 'normal',
+        fontWeight:400,
+        textAlign: 'left'
     }
 
     handleChangeCompleteBackground = (color) => {
-        this.setState({ background: color.hex });
+        this.setState({ background: color.hex, border:color.hex });
     }
 
     handleChangeCompleteColor = (color) => {
         this.setState({ color: color.hex });
     }
 
+    handleFontStyleIt = () => {
+        this.setState({ fontStyle:'italic' })
+    }
+
+    handleFontStyleBold = () => {
+        this.setState({ fontWeight:700 })
+    }
+
+    handleFontStyleRegular = () => {
+        this.setState({ fontWeight:400 })
+    }
+
+    handleFontStyleNormal = () => {
+        this.setState({ fontStyle:'normal' })
+    }
+
+    handleTextAlignLeft = () => {
+        this.setState({ textAlign: 'left' })
+    }
+
+    handleTextAlignCenter = () => {
+        this.setState({ textAlign: 'center' })
+    }
+
+    handleTextAlignRight = () => {
+        this.setState({ textAlign: 'right' })
+    }
+
     handleChange = (event) => {
         this.setState({ text: event.target.value });
     } 
 
-    handleSubmit = (event) => {
-        event.preventDefault();
+    handleDragSize = (fontSize) => {
+
+        this.setState({ fontSize: fontSize + 'em' })
+
+    }
+
+    handleSubmit = () => {
+
+        function formatDate(date) {
+          var monthNames = [
+            "January", "February", "March",
+            "April", "May", "June", "July",
+            "August", "September", "October",
+            "November", "December"
+          ];
+
+          var day = date.getDate(),
+              monthIndex = date.getMonth(),
+              year = date.getFullYear(),
+              time  = date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+
+          return day + ' ' + monthNames[monthIndex] + ' ' + year;
+        }
+
+        var dateNew = new Date(),
+            DateToday = formatDate(dateNew),
+            TimeNow = dateNew.getHours() + ":" + dateNew.getMinutes() + ":" + dateNew.getSeconds();
 
         var newNote = {
             text: this.state.text,
             color: this.state.color,
             background: this.state.background,
-            id: Date.now()
+            border:this.state.background,
+            id: Date.now(),
+            date: DateToday,
+            time: TimeNow,
+            fontSize: this.state.fontSize,
+            fontStyle: this.state.fontStyle,
+            fontWeight: this.state.fontWeight,
+            textAlign: this.state.textAlign
         };
-
        
         this.props.onSubmit(newNote);
 
         this.setState({
             background: '#fff',
             color: '#000',
-            text: ' '
+            border:'#000',
+            text: ' ',
+            date:' ',
+            time:' ',
+            fontSize: 14,
+            fontStyle: 'normal',
+            fontWeight: 400,
+            textAlign:'left'
         });
     }
 
@@ -47,18 +122,38 @@ class Editor extends Component {
         return (
             <form className="editor">
                 <Colors 
+                    background={this.handleChangeCompleteBackground}
                     onChangeCompleteBackground={this.handleChangeCompleteBackground} 
                     onChangeCompleteColor={this.handleChangeCompleteColor}
                 />
-                <textarea 
-
-                    style={{background:this.state.background, 
-                            color:this.state.color}} 
-                    onChange={this.handleChange}
-                    value={this.state.text}
-
-                ></textarea>
-                <div className="editor-btn"><button onClick={this.handleSubmit}>Send</button></div>
+                <TextStyles md={this.handleFontSizeMd} 
+                            sm={this.handleFontSizeSm} 
+                            lg={this.handleFontSizeLg} 
+                            italic={this.handleFontStyleIt} 
+                            bold={this.handleFontStyleBold} 
+                            normal={this.handleFontStyleNormal}
+                            regular={this.handleFontStyleRegular}
+                            leftA={this.handleTextAlignLeft}
+                            rightA={this.handleTextAlignRight}
+                            centerA={this.handleTextAlignCenter}
+                            onMove={this.handleDragSize}
+                />
+                <div className="textWrapper">
+                    <textarea 
+                    
+                        style={{background:this.state.background, 
+                                borderColor:this.state.border,
+                                color:this.state.color, 
+                                fontStyle:this.state.fontStyle, 
+                                fontSize:this.state.fontSize,
+                                fontWeight: this.state.fontWeight,
+                                textAlign: this.state.textAlign}} 
+                        onChange={this.handleChange}
+                        value={this.state.text}
+                    
+                    ></textarea>
+                </div>
+                <div className="editor-btn"><div onClick={this.handleSubmit}>Send</div></div>
             </form>
         );
     }

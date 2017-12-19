@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './Colors.css';
 import { CirclePicker } from 'react-color';
 
 class TextColor extends Component {
@@ -8,7 +7,7 @@ class TextColor extends Component {
         return (
             <div className="item">
                 <div className="title">
-                    Choose a text color
+                    Select a text color
                 </div>
                 <CirclePicker onChangeComplete={ this.props.onChangeColor} />
             </div>

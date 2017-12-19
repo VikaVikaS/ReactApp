@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './App.css';
+
 import Editor from './Editor/Editor';
 import Grid from './Grid/Grid';
 
@@ -32,18 +32,26 @@ class App extends Component {
             this.state.notes.push(newNote);
             this.setState({ notes: this.state.notes });
         }
-        console.log(this.state.notes)
     }
 
-    handleRenderNotes = () => {
+    handleDeleteNote = (note) => {
+        var noteId = note.id;
+        var newNotes = this.state.notes.filter(function(note) {
+            return note.id !== noteId;
+        });
+        this.setState({ notes: newNotes });
+    }
 
+    handleReset = () => {
+        this.setState({ notes: [] });
     }
 
     render() {
         return (
           <div className="NotesApp">
             <Editor onSubmit={this.handleSubmit} />
-            <Grid notes={this.state.notes}/>
+            <Grid notes={this.state.notes} onNoteDelete={this.handleDeleteNote}/>
+            <button className="reset-btn" onClick={this.handleReset}>Delete All</button>
           </div>
         );
     }

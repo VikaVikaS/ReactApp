@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './Colors.css';
+
 
 import Background from './Background';
 import TextColor from './TextColor';
